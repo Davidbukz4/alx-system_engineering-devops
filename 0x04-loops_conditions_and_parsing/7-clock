@@ -12,4 +12,3 @@ do
 	done
 	(( hour++ ))
 done
-echo "Hour: $hour"
