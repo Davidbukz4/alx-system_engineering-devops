@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 # A script that stopped our 4-to_infinity_and_beyond process
 
-kill -15 $(pgrep -f 4-to_infinity_and_beyond)
+pid="$(pgrep -f 4-to_infinity_and_beyond)"
+kill -15 "$pid"
