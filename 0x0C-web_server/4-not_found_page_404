@@ -10,11 +10,20 @@ sudo apt-get -y install nginx
 # write to the html file
 echo "Hello World!" | sudo tee /var/www/html/index.html
 
-# configure a permanent redirect
-str_404='server_name_;\n\terror_page 404 \/404.html;\n\tlocation = /404.html {\n\t\troot /var/www/html;\n\t\tinternal;\n\t}'
-
 # move to the /etc/nginx/sites-available/ directory
 cd /etc/nginx/sites-available/ || exit
+
+# configured a permanent redirect
+str='server_name_;\n\trewrite ^\/redirect_me https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4 permanent;'
+
+# replace it in the default file
+sed -i "s/server_name_;/$str/" default
+
+# write to the html file
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404_page.html
+
+# configured a 404 error page
+str_404='server_name_;\n\terror_page 404 \/404.html;\n\tlocation = /404_page.html {\n\t\troot /var/www/html;\n\t\tinternal;\n\t}'
 
 # replace it in the default file
 sed -i "s/server_name_;/$str_404/" default
