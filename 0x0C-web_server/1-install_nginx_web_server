@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# A script that installs nginx web server
+
+# update package list from the repositories
+sudo apt-get -y update
+
+# install nginx server
+sudo apt-get -y install nginx
+
+# write to the html file
+echo "Hello World!" | sudo tee "/var/www/html/index.html"
+
+# restart nginx server to enable changes
+sudo service nginx restart
