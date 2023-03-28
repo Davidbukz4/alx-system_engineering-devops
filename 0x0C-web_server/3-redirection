@@ -11,13 +11,13 @@ sudo apt-get -y install nginx
 echo "Hello World!" | sudo tee /var/www/html/index.html
 
 # move to the /etc/nginx/sites-available/ directory
-cd /etc/nginx/sites-available/
+cd /etc/nginx/sites-available/ || exit
 
 # configure a permanent redirect
 str='server_name_;\n\trewrite ^\/redirect_me https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4 permanent;'
 
 # replace it in the default file
-sed -i "s/server_name_;/$str/" default
+sudo sed -i "s/server_name_;/$str/" default
 
 # restart nginx server to effect changes
 sudo service nginx restart
