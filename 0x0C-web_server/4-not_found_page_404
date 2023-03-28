@@ -13,8 +13,8 @@ echo "Hello World!" | sudo tee /var/www/html/index.html
 # configure a permanent redirect
 str_404='server_name_;\n\terror_page 404 \/404.html;\n\tlocation = /404.html {\n\t\troot /var/www/html;\n\t\tinternal;\n\t}'
 
-# move to the /etc/nginx/site-available/ directory
-cd /etc/nginx/site-available/
+# move to the /etc/nginx/sites-available/ directory
+cd /etc/nginx/sites-available/
 
 # replace it in the default file
 sed -i "s/server_name_;/$str_404/" default
