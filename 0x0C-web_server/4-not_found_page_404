@@ -10,14 +10,8 @@ sudo apt-get -y install nginx
 # write to the html file
 echo "Hello World!" | sudo tee /var/www/html/index.html
 
-# move to the /etc/nginx/sites-available/ directory
-cd /etc/nginx/sites-available/ || exit
-
 # write to the html file
 echo "Ceci n'est pas une page" | sudo tee /var/www/html/404_page.html
-
-# remove default
-sudo rm -f default
 
 # configured a permanent redirect and 404 error page
 echo "server {
@@ -36,6 +30,10 @@ echo "server {
       internal;
    }
 }" > default
+sudo mv -f default /etc/nginx/sites-available/default
+# move to the /etc/nginx/sites-available/ directory
+#cd /etc/nginx/sites-available/ || exit
+
 # replace it in the default file
 #sudo sed -i "s/server_name_;/$str_404/" default
 
