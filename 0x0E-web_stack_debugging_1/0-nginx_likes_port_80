@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Nginx must be running, and listening on port 80 of all the servers active IPv4 IPs
+
+# configuration in sites-available/default is the correct configuration
+# it is set to listen on port 80, so we copy the configuration to /sites-enabled/default
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+
+# start nginx service since it's not active
+sudo service nginx start
