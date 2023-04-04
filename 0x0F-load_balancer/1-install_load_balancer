@@ -7,7 +7,7 @@ sudo add-apt-repository ppa:vbernat/haproxy-2.6
 sudo apt-get -y update
 
 # install HAproxy
-sudo apt-get install haproxy=2.6.\*
+sudo apt-get -y install haproxy=2.6.\*
 
 # enable HAproxy to be started by the init script
 echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
