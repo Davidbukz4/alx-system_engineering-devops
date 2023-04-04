@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# A script that installs and configures HAproxy on lb-01 server
+
+# enable a dedicated PPA
+sudo apt-get install --no-install-recommends software-properties-common
+sudo add-apt-repository ppa:vbernat/haproxy-2.6
+sudo apt-get -y update
+
+# install HAproxy
+sudo apt-get install haproxy=2.6.\*
+
+# enable HAproxy to be started by the init script
+echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
+
+# configure haproxy.cfg
+echo -e "\nfrontend haproxy_balancer\n\tbind *:80\n\tmode http\n\tdefault_backend myservers\n\nbackend myservers\n\tbalance roundrobin\n\tserver 101298-web-01 34.232.68.93:80 check\n\tserver 101298-web-02 54.152.232.156:80 check" | sudo tee -a /etc/haproxy/haproxy.cfg
+
+# restart haproxy to effect changes
+sudo service haproxy restart
