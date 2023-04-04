@@ -30,11 +30,6 @@ echo "server {
    }
 }" > default
 sudo mv -f default /etc/nginx/sites-available/default
-# move to the /etc/nginx/sites-available/ directory
-#cd /etc/nginx/sites-available/ || exit
-
-# replace it in the default file
-#sudo sed -i "s/server_name_;/$str_404/" default
 
 # restart nginx server to effect changes
 sudo service nginx restart

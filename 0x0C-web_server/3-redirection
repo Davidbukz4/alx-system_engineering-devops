@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# A script that installs nginx web server and configures a permanent redirect
+# A script that installs nginx web server and configures a 404 error page
 
 # update package list from the repositories
 sudo apt-get -y update
@@ -10,14 +10,20 @@ sudo apt-get -y install nginx
 # write to the html file
 echo "Hello World!" | sudo tee /var/www/html/index.html
 
-# move to the /etc/nginx/sites-available/ directory
-cd /etc/nginx/sites-available/ || exit
+# configured a permanent redirect and 404 error page
+echo "server {
+   listen 80 default_server;
+   listen [::]:80 default_server;
+   
+   root /var/www/html;
+   index index.html;
+   location / {
+   }
+   rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
+}" > default
 
-# configure a permanent redirect
-str='server_name_;\n\trewrite ^\/redirect_me https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4 permanent;'
-
-# replace it in the default file
-sudo sed -i "s|server_name_;/$str|" default
+# move to /etc/nginx/sites-available/default
+sudo mv -f default /etc/nginx/sites-available/default
 
 # restart nginx server to effect changes
 sudo service nginx restart
