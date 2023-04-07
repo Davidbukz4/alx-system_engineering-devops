@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# Displays information about sub domains
+
+subdomain_info () {
+  w="www"
+  lb="lb-01"
+  w1="web-01"
+  w2="web-02"
+
+  if [ ! -z "$1" ] && [ ! -z "$2" ]
+  then
+    add=$2"."$1
+    record=$(dig "$add" | grep -A 1 "ANSWER SECTION" | grep "$1" | awk \{'print $4'\})
+    dest_ip=$(dig "$add" | grep -A 1 "ANSWER SECTION" | grep "$1" | awk \{'print $5'\})
+    echo "The subdomain $2 ia a $record record and points to $dest_ip"
+  else
+    i=1
+    for i in {1..4}
+    do
+      if [ "$i" -eq 1 ]
+      then
+        sub=$w
+        add=$w"."$1
+      elif [ "$i" -eq 2 ]
+      then
+        sub=$lb
+        add=$lb"."$1
+      elif [ "$i" -eq 3 ]
+      then
+        sub=$w1
+        add=$w1"."$1
+      else
+        sub=$w2
+        add=$w2"."$1
+      fi
+      record=$(dig "$add" | grep -A 1 "ANSWER SECTION" | grep "$1" | awk \{'print $4'\})
+      dest_ip=$(dig "$add" | grep -A 1 "ANSWER SECTION" | grep "$1" | awk \{'print $5'\})
+      echo "The subdomain $sub ia a $record record and points to $dest_ip"
+      i=$((i + 1))
+    done
+  fi
+}
+
+if [ $# -ge 1 ]
+then
+  if [ $# -gt 1 ]
+  then
+    subdomain_info "$1" "$2"
+  else
+    subdomain_info "$1"
+  fi
+fi
