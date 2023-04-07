@@ -33,7 +33,7 @@ subdomain_info () {
         sub=$w2
         add=$w2"."$1
       fi
-      record=$(dig $add | grep -A 1 "ANSWER SECTION" | grep "$1" | awk \{'print $4'\})
+      record=$(dig "$add" | grep -A 1 "ANSWER SECTION" | grep "$1" | awk \{'print $4'\})
       dest_ip=$(dig "$add" | grep -A 1 "ANSWER SECTION" | grep "$1" | awk \{'print $5'\})
       echo "The subdomain $sub ia a $record record and points to $dest_ip"
       i=$((i + 1))
