@@ -1,0 +1,11 @@
+apt-get -y update
+apt-get -y upgrade
+
+ufw default allow outgoing
+ufw default deny incoming
+
+sudo ufw allow 22/tcp
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+
+sudo ufw enable
