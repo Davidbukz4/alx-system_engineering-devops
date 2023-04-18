@@ -2,7 +2,7 @@
 # Run nginx as nginx user
 
 # check for listen tcp ports using netstat -ltnp
-sudo pkill -o apache2
+pkill apache2
 # set user permission
 chmod 644 /etc/nginx/nginx.conf
 # change user to nginx
