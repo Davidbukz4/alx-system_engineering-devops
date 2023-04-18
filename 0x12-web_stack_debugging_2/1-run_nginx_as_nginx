@@ -2,18 +2,12 @@
 # Run nginx as nginx user
 
 # check for listen tcp ports using netstat -ltnp
-#pkill apache2
+pkill -o apache2
 # set user permission
-#chmod 644 /etc/nginx/nginx.conf
-# change user to nginx
-#sed -i "s/#user www-data/user nginx/" /etc/nginx/nginx.conf
-# change port from 80 to 8080
-#sed -i "s/80/8080/g" /etc/nginx/sites-available/default
-# start nginx service on nginx user privilege
-#sudo -u nginx service nginx start
-
-sed -i "s/#user www-data/user nginx/" /etc/nginx/nginx.conf
-sed -i "s/80/8080/g" /etc/nginx/sites-available/default
 chmod 644 /etc/nginx/nginx.conf
-pkill apache2
+# change user to nginx
+sed -i "s/#user www-data;/user nginx;/" /etc/nginx/nginx.conf
+# change port from 80 to 8080
+sed -i "s/80/8080/g" /etc/nginx/sites-available/default
+# start nginx service on nginx user privilege
 sudo -u nginx service nginx start
