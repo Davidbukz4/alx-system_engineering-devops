@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Run nginx as nginx user
+sudo pkill -o apache2
+chmod 644 /etc/nginx/nginx.conf
+sudo sed -i 's/#user www-data/user nginx/' /etc/nginx/nginx.conf
+sudo -u nginx service nginx start
