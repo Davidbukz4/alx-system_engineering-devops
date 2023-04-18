@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 # Run nginx as nginx user
+
+# check for listen tcp ports using netstat -ltnp
 sudo pkill -o apache2
+# set user permission
 chmod 644 /etc/nginx/nginx.conf
+# change user to nginx
 sudo sed -i 's/#user www-data/user nginx/' /etc/nginx/nginx.conf
+# change port from 80 to 8080
+sudo sed -i 's/80/8080/g' /etc/nginx/sites-enabled/default
+# start nginx service on nginx user privilege
 sudo -u nginx service nginx start
