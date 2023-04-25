@@ -31,5 +31,5 @@ if __name__ == '__main__':
                 all_data.update(data)
         with open(file_name, 'w') as f:
             json.dump(all_data, f)
-    except Exception as e:
-        print(e)
+    except Exception:
+        pass
