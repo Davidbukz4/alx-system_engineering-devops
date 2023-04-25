@@ -21,14 +21,14 @@ if __name__ == '__main__':
             for info in todos_info:
                 if info.get('userId') == user_id:
                     todo_list.append(info)
-                data = list(map(
-                        lambda x: {
-                            "username": user_name,
-                            "task": x.get("title"),
-                            "completed": x.get("completed")
-                        }, todo_list))
-                data = {'{}'.format(user_id): data}
-                all_data.update(data)
+            data = list(map(
+                    lambda x: {
+                        "username": user_name,
+                        "task": x.get("title"),
+                        "completed": x.get("completed")
+                    }, todo_list))
+            data = {'{}'.format(user_id): data}
+            all_data.update(data)
         with open(file_name, 'w') as f:
             json.dump(all_data, f)
     except Exception:
