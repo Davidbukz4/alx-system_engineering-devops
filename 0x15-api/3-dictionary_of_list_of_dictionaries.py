@@ -23,9 +23,9 @@ if __name__ == '__main__':
                     todo_list.append(info)
                 data = list(map(
                         lambda x: {
+                            "username": user_name
                             "task": x.get("title"),
                             "completed": x.get("completed"),
-                            "username": user_name
                         }, todo_list))
                 data = {'{}'.format(user_id): data}
                 all_data.update(data)
