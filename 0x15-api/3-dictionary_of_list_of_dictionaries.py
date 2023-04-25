@@ -18,6 +18,7 @@ if __name__ == '__main__':
         for user in users_info:
             user_name = user.get('username')
             user_id = user.get('id')
+            todo_list = []
             for info in todos_info:
                 if info.get('userId') == user_id:
                     todo_list.append(info)
