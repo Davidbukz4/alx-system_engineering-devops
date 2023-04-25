@@ -27,7 +27,7 @@ if __name__ == '__main__':
                             "completed": x.get("completed"),
                             "username": user_name
                         }, todo_list))
-            data =  {'{}'.format(employee_id): data}
+            data = {'{}'.format(employee_id): data}
             json.dump(data, f)
     except Exception:
         pass
