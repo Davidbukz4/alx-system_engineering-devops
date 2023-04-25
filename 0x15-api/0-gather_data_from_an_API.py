@@ -5,6 +5,7 @@ A module taht interact with REST API
 import requests
 import sys
 
+
 api = 'https://jsonplaceholder.typicode.com'
 
 if __name__ == '__main__':
@@ -26,6 +27,6 @@ if __name__ == '__main__':
         print('Employee {} is done with tasks({}/{}):'
               .format(employee_name, done, undone + done))
         for todo in done_todo:
-            print('\t' + todo)
+            print('\t ' + todo)
     except Exception:
         pass
